@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Love 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    font-family: 'Comic Sans MS', cursive;
+    background: linear-gradient(270deg,#ff9a9e,#fad0c4,#ffd1ff,#a1c4fd);
+    background-size:800% 800%;
+    animation:bgMove 15s ease infinite;
+    overflow:hidden;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.screen{
+    position:absolute;
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    color:#ff2e88;
+    transition:1s;
+}
+
+.hidden{
+    opacity:0;
+    pointer-events:none;
+}
+
+.card{
+    background:white;
+    padding:40px;
+    border-radius:25px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.2);
+    max-width:600px;
+}
+
+button{
+    padding:15px 25px;
+    border:none;
+    border-radius:30px;
+    font-size:1.1em;
+    cursor:pointer;
+    margin:10px;
+}
+
+.nextBtn{
+    background:#ff4fa3;
+    color:white;
+}
+
+.yesBtn{
+    background:#ff2e88;
+    color:white;
+}
+
+.noBtn{
+    background:#999;
+    color:white;
+    position:relative;
+}
+
+.gift{
+    font-size:90px;
+    cursor:pointer;
+    transition:0.3s;
+}
+.gift:hover{
+    transform:scale(1.2);
+}
+
+img{
+    width:250px;
+    border-radius:20px;
+    margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1 GIFT -->
+<div class="screen" id="screen1">
+    <div class="card">
+        <h1>🎁 A Gift For You 🎁</h1>
+        <p>Open it my love 💕</p>
+        <div class="gift" onclick="openGift()">🎁</div>
+        <p id="giftMsg"></p>
+        <button class="nextBtn hidden" id="toScreen2" onclick="goTo(2)">
+            Open Next Surprise ✨
+        </button>
+    </div>
+</div>
+
+<!-- SCREEN 2 MEMORY -->
+<div class="screen hidden" id="screen2">
+    <div class="card">
+        <h1>Our Little World 🌸</h1>
+        <p>
+        Every moment with you feels like magic ✨<br>
+        Every laugh, every hug, every memory.
+        </p>
+
+        <!-- PUT YOUR PHOTO HERE -->
+        <img src="happy_vicky.jpeg" alt="Us Together">
+
+        <p>
+        And this is just the beginning of us 💖
+        </p>
+
+        <button class="nextBtn" onclick="goTo(3)">
+            One More Thing 💌
+        </button>
+    </div>
+</div>
+
+<!-- SCREEN 3 VALENTINE ASK -->
+<div class="screen hidden" id="screen3">
+    <div class="card">
+        <h1>Will You Be My Valentine? 💖</h1>
+
+        <button class="yesBtn" onclick="yesAnswer()">YES 💕</button>
+        <button class="noBtn" id="noBtn" onclick="noAnswer()">No 😢</button>
+
+        <p id="finalMsg"></p>
+    </div>
+</div>
+
+<script>
+
+function openGift(){
+    document.getElementById("giftMsg").innerHTML =
+    "You are my favorite person, my safe place, and my happiness 💖";
+
+    document.getElementById("toScreen2").classList.remove("hidden");
+}
+
+function goTo(num){
+    document.querySelectorAll(".screen").forEach(s=>s.classList.add("hidden"));
+    document.getElementById("screen"+num).classList.remove("hidden");
+}
+
+function yesAnswer(){
+    document.getElementById("finalMsg").innerHTML =
+    "YAY!!! I LOVE YOU SO MUCH 💖✨";
+}
+
+let noCount=0;
+
+function noAnswer(){
+    const reasons = [
+        "Because we are cute together 😌",
+        "Because you love me (admit it 😏)",
+        "Because I will share food 🍕",
+        "Because life is better with us 💕",
+        "Because you already stole my heart 💖"
+    ];
+
+    document.getElementById("finalMsg").innerHTML =
+    reasons[noCount % reasons.length];
+
+    noCount++;
+
+    // move button
+    const btn = document.getElementById("noBtn");
+    btn.style.position="absolute";
+    btn.style.left = Math.random()*70+"%";
+    btn.style.top = Math.random()*70+"%";
+}
+
+</script>
+
+</body>
+</html>
